@@ -13,7 +13,7 @@ find_package(SFML 2.5 REQUIRED graphics network audio window system)
 
 add_executable(network-chat main.cpp)
 
-target_link_libraries(network-chat sfml-network sfml-window sfml-system)
+target_link_libraries(network-chat sfml-network sfml-graphics sfml-window sfml-system)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

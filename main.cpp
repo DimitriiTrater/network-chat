@@ -1,70 +1,67 @@
 #include <iostream>
 #include <SFML\Network.hpp>
-#include <SFML\Window.hpp>
+#include <SFML\Graphics.hpp>
+
 
 int main(int, char**) 
-{   
+{
     char type;
+	char mode = ' ';
 
-    std::string name;
+	sf::IpAddress ip = sf::IpAddress::getLocalAddress();
+
+	sf::TcpSocket socket;
+
+	sf::Packet packet;	
+	
+
     std::string message = "";
-
-
-    sf::TcpSocket tcpSocket;
-    sf::IpAddress ip = sf::IpAddress::getLocalAddress();
+	 
     
-
-    std::cout << "Enter type of connection: [c] - client, [s] - server" << std::endl;
-    std::cin  >> type;
-
-    if (type == 's')
+    std::cout << "Type of connect:  [c] - client, [s] - server" << std::endl;
+    std::cin >> type;
+    
+    if(type == 's')
     {
-        sf::TcpListener tcpListener;
-        tcpListener.listen(2000);
-
-        if (tcpListener.accept(tcpSocket) != sf::Socket::Done)
-            std::cerr << "Error!" << std::endl;
-    }
+    	std::cout << "[info] server ip: " << ip << std::endl;
+        sf::TcpListener listener;
+        listener.listen(2000);
+        if (listener.accept(socket) != sf::Socket::Done)    //который будет содержать новое соединение
+            std::cerr << "[error] server side" << std::endl;
+    } 
     else if (type == 'c')
     {
-        if (tcpSocket.connect(ip, 2000) != sf::Socket::Done)
-            std::cerr << "Error!" << std::endl;
-    }
-
-
-    std::cout << "Enter your name" << std::endl;
-    std::cin  >> name;
-
-    tcpSocket.setBlocking(false);
-
-    sf::Packet tcpPacket;
-
-    while (true)
+        if(socket.connect(ip, 2000) != sf::Socket::Done)
+            std::cerr << "[error] client side" << std::endl; //ip и Порт
+    } 
+ 
+    socket.setBlocking(false);
+ 
+ 
+	while(true)
     {
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        if(type == 's')
+        {
+            if(socket.receive(packet) == sf::Socket::Done)
+            {				                    //Команда которая ожидает данных в виде пакета от клиентской части
+                packet >> message;				//вытаскиваем значение из пакета 
+                std::cout << "[message] " << message << std::endl;
+                message = "";    
+            } 	
+        }
+    
+        if(type == 'c')
         {
             std::getline(std::cin, message);
+            if (message != "")
+            {    
+                packet.clear();	
+                packet << message;		//Пакуем значения
+                socket.send(packet);	//Отправка данных
+                message = "";
+            }
         }
-
-        if (message != "")
-        {
-            tcpPacket.clear();
-            tcpPacket << name << message;
-
-            tcpSocket.send(tcpPacket);
-
-            message = "";
-        }
-
-        if (tcpSocket.receive(tcpPacket) == sf::Socket::Done)
-        {
-            std::string nameRec;
-            std::string messageRec;
-
-            tcpPacket    >> nameRec >> messageRec;
-            std::cout << nameRec << ": " << messageRec << std::endl;
-        }
-    }
-
-    return 0;
+	}
+ 
+	return 0;
 }
