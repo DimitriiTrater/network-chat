@@ -41,7 +41,10 @@ int main(int, char**)
 
     while (true)
     {
-        std::cin >> message;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        {
+            std::getline(std::cin, message);
+        }
 
         if (message != "")
         {
