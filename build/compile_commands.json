@@ -1,7 +1,0 @@
-[
-{
-  "directory": "C:/Users/1/CLionProjects/network-chat/build",
-  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DSFML_STATIC @CMakeFiles/network-chat.dir/includes_CXX.rsp -g -o CMakeFiles\\network-chat.dir\\main.cpp.obj -c C:\\Users\\1\\CLionProjects\\network-chat\\main.cpp",
-  "file": "C:/Users/1/CLionProjects/network-chat/main.cpp"
-}
-]

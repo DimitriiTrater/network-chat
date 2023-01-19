@@ -1,1 +1,0 @@
- "C:/Users/1/CLionProjects/libs/SFML-2.5.1/lib/libsfml-network-s-d.a" "C:/Users/1/CLionProjects/libs/SFML-2.5.1/lib/libsfml-window-s-d.a" "C:/Users/1/CLionProjects/libs/SFML-2.5.1/lib/libsfml-system-s-d.a" -lws2_32 -lOpenGL32 -lwinmm -lgdi32 -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32 

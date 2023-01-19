@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\network-chat.dir/objects.a
-C:\msys64\mingw64\bin\ar.exe qc CMakeFiles\network-chat.dir/objects.a @CMakeFiles\network-chat.dir\objects1.rsp
-C:\msys64\mingw64\bin\g++.exe -g -static -static-libgcc -Wl,--whole-archive CMakeFiles\network-chat.dir/objects.a -Wl,--no-whole-archive -o network-chat.exe -Wl,--out-implib,libnetwork-chat.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\network-chat.dir\linklibs.rsp
